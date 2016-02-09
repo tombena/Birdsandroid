@@ -1,6 +1,8 @@
 package fr.sio.ecp.federatedbirds;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -56,7 +58,7 @@ public class ApiClient {
     }
 
     private <T> T get(String path, Type type) throws IOException {
-        return method("GET", path, null, type); //no body for GET
+        return method("GET", path, null, type);
     }
 
     private <T> T post(String path, Object body, Type type) throws IOException {
@@ -99,10 +101,6 @@ public class ApiClient {
 
     public List<User> getUserFollowed(Long userId) throws IOException {
         String id = userId != null ? Long.toString(userId) : "me";
-
-
-        //Returning UsersList rather than List<User>
-
         TypeToken<UsersList> type = new TypeToken<UsersList>() {};
         UsersList usersList = get("users/" + id + "/followed", type.getType());
         return usersList.users;
@@ -136,4 +134,13 @@ public class ApiClient {
         body.addProperty("email", email);
         return post("users", body, String.class);
     }
+
+//    public String uploadPic(Bitmap avatar){
+//        JsonObject body = new JsonObject();
+//        try {
+//            return post("upload", body, Bitmap.class);
+//        }catch (IOException e){
+//            Log.e("Failed", "upload");
+//        }
+//    }
 }

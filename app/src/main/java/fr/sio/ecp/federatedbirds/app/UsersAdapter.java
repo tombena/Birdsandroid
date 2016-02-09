@@ -51,7 +51,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
         holder.mUsernameView.setText(user.login);
 
 
-        //click on a user avatar redirects to user's profile
+        //click on a user avatar redirects to his profile
         holder.mAvatarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +61,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
                 v.getContext().startActivity(intent);
             }
         });
+
+
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
