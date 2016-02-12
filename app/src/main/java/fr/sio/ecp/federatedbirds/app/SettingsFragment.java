@@ -8,9 +8,6 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import fr.sio.ecp.federatedbirds.R;
 import fr.sio.ecp.federatedbirds.auth.TokenManager;
 
-/**
- * Created by Michaël on 26/11/2015.
- */
 public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override

@@ -2,7 +2,6 @@ package fr.sio.ecp.federatedbirds.app;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,30 +17,38 @@ import fr.sio.ecp.federatedbirds.ApiClient;
 import fr.sio.ecp.federatedbirds.R;
 import fr.sio.ecp.federatedbirds.auth.TokenManager;
 
-/**
- * Created by Michaël on 30/11/2015.
- */
-public class LoginTaskFragment extends DialogFragment {
-    //class is named LoginTaskFragment for conveniency
-    // could have been SignUpTaskFragment as well
+public class TaskFragment extends DialogFragment {
+    //class is named TaskFragment for convenience
+    // could have been SignUpTaskFragment
+    // or UploadTaskFragment
+    // or Login TaskFragment
     private static final String ARG_LOGIN = "login";
     private static final String ARG_PASSWORD = "password";
     private static final String ARG_EMAIL = "email";
+    private static final String ARG_FILEPATH= "filePath";
+
+    //1 arg for Upload
+    public void setArguments(String filePath) {
+        Bundle args = new Bundle();
+        args.putString(TaskFragment.ARG_FILEPATH, filePath);
+        setArguments(args);
+    }
+
 
     //2 args for Login
     public void setArguments(String login, String password) {
         Bundle args = new Bundle();
-        args.putString(LoginTaskFragment.ARG_LOGIN, login);
-        args.putString(LoginTaskFragment.ARG_PASSWORD, password);
+        args.putString(TaskFragment.ARG_LOGIN, login);
+        args.putString(TaskFragment.ARG_PASSWORD, password);
         setArguments(args);
     }
 
     //3 args for Signup
     public void setArguments(String login, String password, String email) {
         Bundle args = new Bundle();
-        args.putString(LoginTaskFragment.ARG_LOGIN, login);
-        args.putString(LoginTaskFragment.ARG_PASSWORD, password);
-        args.putString(LoginTaskFragment.ARG_EMAIL, email);
+        args.putString(TaskFragment.ARG_LOGIN, login);
+        args.putString(TaskFragment.ARG_PASSWORD, password);
+        args.putString(TaskFragment.ARG_EMAIL, email);
         setArguments(args);
     }
 
@@ -51,7 +58,7 @@ public class LoginTaskFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         AsyncTaskCompat.executeParallel(
-                new LoginTaskFragment.LoginTask()
+                new TaskFragment.LoginTask()
         );
     }
 
@@ -60,7 +67,15 @@ public class LoginTaskFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ProgressDialog dialog = new ProgressDialog(getContext());
         dialog.setIndeterminate(true);
-        dialog.setMessage(getString(R.string.login_progress));
+        String email = getArguments().getString("email");
+        String login = getArguments().getString("login");
+        if(email!=null){
+            dialog.setMessage(getString(R.string.signin_progress));
+        } else if (login!=null) {
+            dialog.setMessage(getString(R.string.login_progress));
+        } else {
+            dialog.setMessage(getString(R.string.upload_progress));
+        }
         return dialog;
     }
 
@@ -72,25 +87,25 @@ public class LoginTaskFragment extends DialogFragment {
             String login = getArguments().getString("login");
             String password = getArguments().getString("password");
             String email = getArguments().getString("email");
-            if (email == null) {
+            String filePath = getArguments().getString("filePath");
+            if (email== null && filePath ==null) { //login
                 try {
                     return ApiClient.getInstance(getContext()).login(login, password);
                 } catch (IOException e) {
                     Log.e(LoginActivity.class.getSimpleName(), "Login failed", e);
                     return null;
                 }
-            } else {
+            } else if(email!=null) { //signup
                 try {
                     return ApiClient.getInstance(getContext()).signup(login, password, email);
                 } catch (IOException e) {
-                    //TODO stay on SignupActivity if signup failed
                     Log.e(LoginActivity.class.getSimpleName(), "Signup failed", e);
                     return null;
                 }
 
+            } else { //upload
+                return ApiClient.getInstance(getContext()).uploadPic(filePath);
             }
-
-
         }
 
         @Override

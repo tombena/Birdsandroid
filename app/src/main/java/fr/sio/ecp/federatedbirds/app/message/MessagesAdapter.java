@@ -1,4 +1,4 @@
-package fr.sio.ecp.federatedbirds.app;
+package fr.sio.ecp.federatedbirds.app.message;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +13,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import fr.sio.ecp.federatedbirds.R;
+import fr.sio.ecp.federatedbirds.app.user.ProfileActivity;
 import fr.sio.ecp.federatedbirds.model.Message;
 
-/**
- * Created by Michaël on 24/11/2015.
- */
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
 
     private List<Message> mMessages;

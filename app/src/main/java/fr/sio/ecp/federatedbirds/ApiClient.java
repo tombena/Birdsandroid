@@ -2,6 +2,7 @@ package fr.sio.ecp.federatedbirds;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.util.Log;
 
@@ -9,6 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -23,12 +26,9 @@ import fr.sio.ecp.federatedbirds.auth.TokenManager;
 import fr.sio.ecp.federatedbirds.model.Message;
 import fr.sio.ecp.federatedbirds.model.User;
 
-/**
- * Created by Michaël on 24/11/2015.
- */
+
 public class ApiClient {
 
-    //new class
     public class UsersList {
         public final String continuationToken;
         public final List<User> users;
@@ -135,12 +135,27 @@ public class ApiClient {
         return post("users", body, String.class);
     }
 
-//    public String uploadPic(Bitmap avatar){
-//        JsonObject body = new JsonObject();
-//        try {
-//            return post("upload", body, Bitmap.class);
-//        }catch (IOException e){
-//            Log.e("Failed", "upload");
-//        }
-//    }
+
+    //doesn't work properly
+    public String uploadPic(String filePath){
+        Bitmap avatar = BitmapFactory.decodeFile(filePath);
+        try {
+            return post("upload", avatar, String.class);
+        }catch (IOException e){
+            Log.e("Failed", "upload");
+            return null;
+        }
+    }
+
+    public String fol (Long userId, String un) {
+        try {
+            Log.d(un + "follow", "POST");
+            return post("users/" + userId + "/" + un + "follow", null, User.class);
+        } catch (IOException e){
+            Log.e("Failed to ", "follow/unfollow");
+            return null;
+        }
+    }
+
+
 }

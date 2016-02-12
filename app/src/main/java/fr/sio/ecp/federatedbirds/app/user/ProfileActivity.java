@@ -1,11 +1,9 @@
-package fr.sio.ecp.federatedbirds.app;
+package fr.sio.ecp.federatedbirds.app.user;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,14 +23,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import fr.sio.ecp.federatedbirds.ApiClient;
 import fr.sio.ecp.federatedbirds.R;
+import fr.sio.ecp.federatedbirds.app.TaskFragment;
+import fr.sio.ecp.federatedbirds.app.message.MessagesAdapter;
+import fr.sio.ecp.federatedbirds.app.message.MessagesLoader;
 import fr.sio.ecp.federatedbirds.model.Message;
 import fr.sio.ecp.federatedbirds.model.User;
 
-/**
- * Created by tomb on 26/01/16.
- */
+
 public class ProfileActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Message>> {
 
     private MessagesAdapter mMessagesAdapter;
@@ -59,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements LoaderManager.
         findViewById(R.id.avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picChange();
+                picClicked();
             }
         });
 
@@ -97,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity implements LoaderManager.
 
     }
 
-    private void picChange(){
+    private void picClicked(){
         Log.d("Profile image", "change");
         //TODO authenticate user -> check for match with current page
 
@@ -144,16 +142,16 @@ public class ProfileActivity extends AppCompatActivity implements LoaderManager.
                     cursor.close();
 
 
-                    Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
+                    // pass filePath to Fragment
                     //TODO handle the image input
+                    TaskFragment taskFragment = new TaskFragment();
+                    taskFragment.setArguments(filePath);
+                    taskFragment.show(getSupportFragmentManager(), "upload_task");
                     Log.d("IMAGE", "got");
-
-                    //traitement
                     //ApiClient.getInstance(getApplicationContext()).uploadPic(yourSelectedImage);
                 }
         }
     }
-
 
 
 }

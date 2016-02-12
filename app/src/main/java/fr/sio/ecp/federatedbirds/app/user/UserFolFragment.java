@@ -1,6 +1,5 @@
-package fr.sio.ecp.federatedbirds.app;
+package fr.sio.ecp.federatedbirds.app.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,9 +19,7 @@ import java.util.List;
 import fr.sio.ecp.federatedbirds.R;
 import fr.sio.ecp.federatedbirds.model.User;
 
-/**
- * Created by Michaël on 30/11/2015.
- */
+
 public class UserFolFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<User>> {
 
     private static final int LOADER_USERS = 0;
@@ -46,7 +43,6 @@ public class UserFolFragment extends Fragment implements LoaderManager.LoaderCal
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
         mUsersAdapter = new UsersAdapter();
         listView.setAdapter(mUsersAdapter);
-
     }
 
     @Override
@@ -72,6 +68,8 @@ public class UserFolFragment extends Fragment implements LoaderManager.LoaderCal
 
     @Override
     public void onLoaderReset(Loader<List<User>> loader) { }
+
+
 
 
 

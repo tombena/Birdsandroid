@@ -5,9 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import fr.sio.ecp.federatedbirds.R;
 
-/**
- * Created by Michaël on 26/11/2015.
- */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

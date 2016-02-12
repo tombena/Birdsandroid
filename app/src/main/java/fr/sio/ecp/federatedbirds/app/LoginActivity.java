@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        LoginTaskFragment taskFragment = new LoginTaskFragment();
+        TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(login, password);
         taskFragment.show(getSupportFragmentManager(), "login_task");
 

@@ -1,24 +1,15 @@
 package fr.sio.ecp.federatedbirds.app;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.io.IOException;
-
-import fr.sio.ecp.federatedbirds.ApiClient;
 import fr.sio.ecp.federatedbirds.R;
-import fr.sio.ecp.federatedbirds.auth.TokenManager;
 import fr.sio.ecp.federatedbirds.utils.ValidationUtils;
 
-/**
- * Created by tomb on 26/01/16.
- */
 public class SignupActivity extends AppCompatActivity {
 
     @Override
@@ -73,13 +64,12 @@ public class SignupActivity extends AppCompatActivity {
 
 
         //POST for account creation
-        LoginTaskFragment taskFragment = new LoginTaskFragment();
+        TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(username, password, email);
         taskFragment.show(getSupportFragmentManager(), "signup_task");
 
 
-        //if success, redirect to LoginActivity
-        Log.d("Account creation", "SUCCESS");
+        //redirect to LoginActivity
         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
 

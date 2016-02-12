@@ -1,4 +1,4 @@
-package fr.sio.ecp.federatedbirds.app;
+package fr.sio.ecp.federatedbirds.app.user;
 
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -6,11 +6,10 @@ import android.util.Log;
 
 import java.util.List;
 
+import fr.sio.ecp.federatedbirds.app.user.FollowersLoader;
+import fr.sio.ecp.federatedbirds.app.user.UserFolFragment;
 import fr.sio.ecp.federatedbirds.model.User;
 
-/**
- * Created by tomb on 23/01/16.
- */
 public class UserFollowersFragment extends UserFolFragment {
 
     @Override

@@ -3,9 +3,6 @@ package fr.sio.ecp.federatedbirds.utils;
 
 import fr.sio.ecp.federatedbirds.ApiClient;
 
-/**
- * Created by Michaël on 02/11/2015.
- */
 public class ValidationUtils {
 
     private static final String LOGIN_PATTERN = "^[A-Za-z0-9_-]{4,12}$";

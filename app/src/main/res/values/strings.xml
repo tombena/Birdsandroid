@@ -26,5 +26,7 @@
     <string name="email">Adresse mail</string>
     <string name="signin_progress">Inscription en cours...</string>
     <string name="signin_failed">Échec de création de compte</string>
+    <string name="fol_failed">Action de suivi échouée</string>
+    <string name="upload_progress">Mise à jour de la photo en cours...</string>
 
 </resources>

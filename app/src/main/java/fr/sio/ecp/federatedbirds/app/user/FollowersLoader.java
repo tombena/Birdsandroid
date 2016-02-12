@@ -1,4 +1,4 @@
-package fr.sio.ecp.federatedbirds.app;
+package fr.sio.ecp.federatedbirds.app.user;
 
 import android.content.Context;
 
@@ -8,10 +8,8 @@ import java.util.List;
 import fr.sio.ecp.federatedbirds.ApiClient;
 import fr.sio.ecp.federatedbirds.model.User;
 
-/**
- * Created by tomb on 21/01/16.
- */
-public class FollowersLoader extends UsersLoader{
+
+public class FollowersLoader extends UsersLoader {
 
     public FollowersLoader(Context context, Long userId) {
         super(context, userId);

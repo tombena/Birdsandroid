@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import fr.sio.ecp.federatedbirds.R;
+import fr.sio.ecp.federatedbirds.app.user.FolTaskFragment;
+import fr.sio.ecp.federatedbirds.app.user.UserFollowedFragment;
+import fr.sio.ecp.federatedbirds.app.user.UserFollowersFragment;
 import fr.sio.ecp.federatedbirds.auth.TokenManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,15 +59,12 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                         startActivity(intent);
                         return true;
-
-                    // if followers button clicked
                     case R.id.followers:
                         fragment = new UserFollowersFragment();
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.main_container, fragment)
                                 .commit();
                         return true;
-
                 }
                 ((DrawerLayout) findViewById(R.id.drawer)).closeDrawer(navigationView);
                 return false;

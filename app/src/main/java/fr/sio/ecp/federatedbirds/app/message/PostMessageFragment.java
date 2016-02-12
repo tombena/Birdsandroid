@@ -1,4 +1,4 @@
-package fr.sio.ecp.federatedbirds.app;
+package fr.sio.ecp.federatedbirds.app.message;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -25,9 +25,6 @@ import fr.sio.ecp.federatedbirds.R;
 import fr.sio.ecp.federatedbirds.auth.TokenManager;
 import fr.sio.ecp.federatedbirds.model.Message;
 
-/**
- * Created by admin on 02/12/15.
- */
 public class PostMessageFragment extends DialogFragment {
 
     private EditText mMessageText;
@@ -114,7 +111,6 @@ public class PostMessageFragment extends DialogFragment {
             @Override
             protected void onPostExecute(Message message) {
                 if (message != null) {
-                    //((HomeFragment) getTargetFragment()).onMessagePosted(message);
                     getTargetFragment().onActivityResult(
                             getTargetRequestCode(),
                             Activity.RESULT_OK,

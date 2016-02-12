@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-/**
- * Created by Michaël on 25/11/2015.
- */
 public class TokenManager {
 
     private static final String AUTH_PREFERENCES = "auth";
